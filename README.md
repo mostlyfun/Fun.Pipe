@@ -1,10 +1,10 @@
 # Fun.Pipe
 
 Functional pipe methods for csharp. This library aims to provide to some extent the expresiveness of functional approaches in C#.
-The library is available as a NuGet package [https://www.nuget.org/packages/fun-pipe/](https://www.nuget.org/packages/fun-pipe/), and source code in repository [https://github.com/mostlyfun/fun-pipe-csharp/](https://github.com/mostlyfun/fun-pipe-csharp/).
+The library is available as a NuGet package [https://www.nuget.org/packages/Fun.Pipe/](https://www.nuget.org/packages/Fun.Pipe/), and source code in repository [https://github.com/mostlyfun/Fun.Pipe/](https://github.com/mostlyfun/Fun.Pipe/).
 
 ```powershell
-PM> Install-Package fun-pipe
+PM> Install-Package Fun.Pipe
 ```
 
 
@@ -45,7 +45,7 @@ The library provides three types `Opt<T>`, `Res` and `Res<T>` which enable the m
  * `Match` -> maps the result into a value depending on either it is Ok or Err.
 
 ## Example Pipe: Parse
-Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeParse.cs](https://github.com/mostlyfun/fun-pipe-csharp/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeParse.cs).
+Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeParse.cs](https://github.com/mostlyfun/Fun.Pipe/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeParse.cs).
 
 Consider a very simplified version of a classical file parsing scenario:
 * We get the filepath from user, the user may or may not provide the input. Therefore, `null` check is required for the traditional `GetFilepathFromUserMaybeNull` method, which might easily be forgotten. `GetFilepathFromUser`, on the other hand, returns an option which makes it explicit that `None` case must be handled. Further, options and results are automatically handled in pipe methods (Map, Run, TryMap, TryRun, and their async counterparts).
@@ -126,7 +126,7 @@ static async Task<Res<int>> PipeExplicitAsync(double flip)
 Note that, manual early exits (as `return`s in the imperative) are not required. `Err`s encountered at any stage will not be lost but carried on. Note that the method ideally  would just return the result, leaving the decision to throw, log, or ignore the error to the caller.
 
 ## Example Pipe: Web Request
-Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeWebReq.cs](https://github.com/mostlyfun/fun-pipe-csharp/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeWebReq.cs).
+Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeWebReq.cs](https://github.com/mostlyfun/Fun.Pipe/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExamplePipeWebReq.cs).
 
 Now assume that:
 * we make a web request to get a wizard,
@@ -248,7 +248,7 @@ static async Task<Res> Pipe(double flip, string wizardGuid)
 ```
 
 ## Opt in a nutshell
-Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExampleOpt.cs](https://github.com/mostlyfun/fun-pipe-csharp/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExampleOpt.cs).
+Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExampleOpt.cs](https://github.com/mostlyfun/Fun.Pipe/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExampleOpt.cs).
 
 ```csharp
 // Some of T
@@ -479,7 +479,7 @@ Assert(string.Join(" | ", optPersons.UnwrapValues().Select(p => p.Name)) == "Mer
 ```
 
 ## Res in a nutshell
-Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExampleRes.cs](https://github.com/mostlyfun/fun-pipe-csharp/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExampleRes.cs).
+Complete example can be found here: [/src/Fun.Pipe/Fun.Pipe.Examples/ExampleRes.cs](https://github.com/mostlyfun/Fun.Pipe/blob/main/src/Fun.Pipe/Fun.Pipe.Examples/ExampleRes.cs).
 
 ```csharp
 // just Ok
