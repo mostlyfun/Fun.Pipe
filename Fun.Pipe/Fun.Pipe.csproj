@@ -11,7 +11,7 @@
     <Description>Functional option and result types, and pipe methods for csharp to allow for concise and expressive method chaining.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mostlyfun/fun-pipe-csharp</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mostlyfun/Fun.Pipe</RepositoryUrl>
     <RespositoryType>git</RespositoryType>
     <PackageTags>Pipe, Chain, Option, Result, Function, Functional, Lambda</PackageTags>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\uarikan\Documents\GitHub\fun-pipe-csharp\src\Fun.Pipe\Fun.Pipe\Fun.Pipe.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
 </Project>
