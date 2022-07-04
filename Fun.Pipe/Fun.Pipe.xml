@@ -1,0 +1,1499 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fun.Pipe</name>
+    </assembly>
+    <members>
+        <member name="T:Fun.Extensions">
+            <summary>
+            Static extension or utility methods for Opt, Res, or Pipe.
+            </summary>
+            <summary>
+            Static extension or utility methods for Opt, Res, or Pipe.
+            </summary>
+            <summary>
+            Static extension or utility methods for Opt, Res, or Pipe.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.UnwrapValues``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns IEnumerable yielding unwrapped values of elements that are <see cref="F:Fun.Opt`1.IsSome"/>.
+            </summary>
+            <typeparam name="T">Underlying type of the Opt.</typeparam>
+            <param name="collection">Collection of opt values.</param>
+        </member>
+        <member name="M:Fun.Extensions.UnwrapValues``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns IEnumerable yielding unwrapped values of elements that are <see cref="F:Fun.Opt`1.IsSome"/> and satisfies the given <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">Underlying type of the Opt.</typeparam>
+            <param name="collection">Collection of opt values.</param>
+            <param name="predicate">Predicate to filter values of Some elements of the collection.</param>
+        </member>
+        <member name="M:Fun.Extensions.UnwrapValues``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns IEnumerable yielding unwrapped values of elements that are <see cref="P:Fun.Res`1.IsOk"/>.
+            </summary>
+            <typeparam name="T">Underlying type of the Res.</typeparam>
+            <param name="collection">Collection of result values.</param>
+        </member>
+        <member name="M:Fun.Extensions.UnwrapValues``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns IEnumerable yielding unwrapped values of elements that are <see cref="P:Fun.Res`1.IsOk"/> and satisfies the given <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">Underlying type of the Opt.</typeparam>
+            <param name="collection">Collection of opt values.</param>
+            <param name="predicate">Predicate to filter values of Some elements of the collection.</param>
+        </member>
+        <member name="M:Fun.Extensions.FirstOrNone``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Opt counterpart of FirstOrDefault, which returns the first non-null element if <paramref name="enumerable"/> has any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.FirstOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Opt counterpart of FirstOrDefault, which returns the first non-null element if <paramref name="enumerable"/> has any satisfying the <paramref name="predicate"/>, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.FirstSomeOrNone``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns first IsSome element of the <paramref name="enumerable"/> if any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.FirstSomeOrNone``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns first IsSome element of the <paramref name="enumerable"/> whose unwrapped value satisfies the <paramref name="predicate"/> if any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.FirstOkOrNone``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns first IsOk element of the <paramref name="enumerable"/> if any, Err otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.FirstOkOrNone``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns first IsOk element of the <paramref name="enumerable"/> whose unwrapped value satisfies the <paramref name="predicate"/> if any, Err otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastOrNone``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Opt counterpart of LastOrDefault, which returns the last non-null element if <paramref name="enumerable"/> has any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Opt counterpart of LastOrDefault, which returns the last non-null element if <paramref name="enumerable"/> has any satisfying the <paramref name="predicate"/>, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastSomeOrNone``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns last IsSome element of the <paramref name="enumerable"/> if any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastSomeOrNone``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns last IsSome element of the <paramref name="enumerable"/> whose unwrapped value satisfies the <paramref name="predicate"/> if any, None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastOkOrNone``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns last IsOk element of the <paramref name="enumerable"/> if any, Err otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LastOkOrNone``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns last IsOk element of the <paramref name="enumerable"/> whose unwrapped value satisfies the <paramref name="predicate"/> if any, Err otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AnySome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns whether <paramref name="enumerable"/> has any IsSome element or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AnySome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether <paramref name="enumerable"/> has any IsSome element whose value satisfies the <paramref name="predicate"/> or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AnyOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns whether <paramref name="enumerable"/> has any IsSome element or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AnyOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether <paramref name="enumerable"/> has any IsSome element whose value satisfies the <paramref name="predicate"/> or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AllSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns whether all elements of <paramref name="enumerable"/> are IsSome or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AllSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether all elements of <paramref name="enumerable"/> are IsSome unwrapped value of which satisfies the <paramref name="predicate"/> or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AllOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns whether all elements of <paramref name="enumerable"/> are IsOk or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AllOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether all elements of <paramref name="enumerable"/> are IsOk unwrapped value of which satisfies the <paramref name="predicate"/> or not.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.CountSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}})">
+            <summary>
+            Returns the number of IsSome elements of the <paramref name="enumerable"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.CountSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the number of IsSome elements of the <paramref name="enumerable"/> unwrapped values of which satisfy the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.CountOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}})">
+            <summary>
+            Returns the number of IsOk elements of the <paramref name="enumerable"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.CountOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the number of IsOk elements of the <paramref name="enumerable"/> unwrapped values of which satisfy the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.SelectSome``2(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,``1})">
+            <summary>
+            Maps unwrapped values of IsSome elements of the <paramref name="enumerable"/> by the <paramref name="selector"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.SelectOk``2(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,``1})">
+            <summary>
+            Maps unwrapped values of IsOk elements of the <paramref name="enumerable"/> by the <paramref name="selector"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.WhereSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Filters unwrapped values of IsSome elements of the <paramref name="enumerable"/> by the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.WhereOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean})">
+            <summary>
+            Filters unwrapped values of IsOk elements of the <paramref name="enumerable"/> by the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ForEachSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Action{``0})">
+            <summary>
+            Applies the <paramref name="action"/> on unwrapped value of each IsSome elements of the <paramref name="enumerable"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ForEachSome``1(System.Collections.Generic.IEnumerable{Fun.Opt{``0}},System.Func{``0,System.Boolean},System.Action{``0})">
+            <summary>
+            Applies the <paramref name="action"/> on unwrapped value of each IsSome elements of the <paramref name="enumerable"/> that satisfies the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ForEachOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Action{``0})">
+            <summary>
+            Applies the <paramref name="action"/> on unwrapped value of each IsOk elements of the <paramref name="enumerable"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ForEachOk``1(System.Collections.Generic.IEnumerable{Fun.Res{``0}},System.Func{``0,System.Boolean},System.Action{``0})">
+            <summary>
+            Applies the <paramref name="action"/> on unwrapped value of each IsOk elements of the <paramref name="enumerable"/> that satisfies the <paramref name="predicate"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.GetValueOrNone``2(System.Collections.Generic.Dictionary{``0,``1},``0)">
+            <summary>
+            Returns Some of value from <paramref name="dictionary"/> with the given <paramref name="key"/> if exists; None if the key is absent.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.GetValueOrNone``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0)">
+            <summary>
+            Returns Some of value from <paramref name="dictionary"/> with the given <paramref name="key"/> if exists; None if the key is absent.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Some``1(``0)">
+            <summary>
+            Creates Some of <typeparamref name="T"/> with the given <paramref name="value"/>.
+            Note that 'null' is not allowed and automatically mapped to None.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.None``1">
+            <summary>
+            Creates None of <typeparamref name="T"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AsOpt``1(Fun.Res{``0})">
+            <summary>
+            Converts Res to Opt: maps <paramref name="result"/> to Some of its value when IsOk; to None when IsErr.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ToOpt``1(``0)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Some``1(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ToOpt``1(``0,System.Func{``0,System.Boolean})">
+            <summary>
+            Returns Some(<paramref name="value"/>) if <paramref name="validator"/>(<paramref name="value"/>) returns true; None otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Or``1(Fun.Opt{``0},Fun.Opt{``0})">
+            <summary>
+            Returns back <paramref name="first"/> (this) if it is Some; returns <paramref name="second"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfNone``1(Fun.Opt{``0})">
+            <summary>
+            Does nothing and returns itself when <paramref name="maybe"/> IsSome; throws when IsNone.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfNone``1(Fun.Opt{``0},System.String)">
+            <summary>
+            Does nothing and returns itself when <paramref name="maybe"/> IsSome; throws with the given <paramref name="errorMessage"/> when IsNone.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogIfNone``1(Fun.Opt{``0},System.String)">
+            <summary>
+            Does nothing when <paramref name="maybe"/> IsSome; logs the given <paramref name="errorMessage"/> when IsNone.
+            Returns itself.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunIfNone``1(Fun.Opt{``0},System.Action)">
+            <summary>
+            Does nothing when <paramref name="maybe"/> IsSome; runs the given <paramref name="action"/> when IsNone.
+            Returns itself.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``2(Fun.Opt{``0},System.Func{``0,``1},System.Func{``1})">
+            <summary>
+            Maps <paramref name="maybe"/> into <paramref name="some"/>(maybe.Unwrap()) whenever maybe.IsSome; and into <paramref name="none"/>() otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``2(Fun.Opt{``0},System.Func{``0,``1},``1)">
+            <summary>
+            Maps <paramref name="maybe"/> into <paramref name="some"/>(maybe.Unwrap()) whenever maybe.IsSome; and into <paramref name="none"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Opt{``0},System.Action{``0},System.Action)">
+            <summary>
+            Executes <paramref name="some"/>(maybe.Unwrap()) whenever <paramref name="maybe"/>.IsSome; <paramref name="none"/>() otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Run``1(Fun.Opt{``0},System.Action)">
+            <summary>
+            Runs <paramref name="action"/>() only if maybe.IsSome, and returns back <paramref name="maybe"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Run``1(Fun.Opt{``0},System.Action{``0})">
+            <summary>
+            Runs <paramref name="action"/>(<paramref name="maybe"/>.Unwrap()) only if maybe.IsSome, and returns back <paramref name="maybe"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``1})">
+            <summary>
+            Returns None when <paramref name="maybe"/> IsNone; Some(<paramref name="map"/>()) when IsSome.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,``1})">
+            <summary>
+            Returns None when <paramref name="maybe"/> IsNone; Some(<paramref name="map"/>(maybe.Unwrap())) when IsSome.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{Fun.Opt{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,Fun.Opt{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(``0,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="!:Run&lt;T&gt;(T, Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(``0,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="!:Run&lt;T&gt;(T, Action&lt;T&gt;)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Run``1(Fun.Opt{``0},System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Run``1(Fun.Opt{``0},System.Action{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            <inheritdoc cref="!:Map&lt;TOut&gt;(Func&lt;TOut&gt;)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(``0,System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="!:Map&lt;T, TOut&gt;(T, Func&lt;T, TOut&gt;)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseOrNone``1(System.String,System.Func{System.String,``0})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> using the <paramref name="parser"/> if succeeds; None if fails.
+            Parser is called within a try-catch block, where exceptions are mapped to None.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseIntOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseIntOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDoubleOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDoubleOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseFloatOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseFloatOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseShortOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseShortOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseLongOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseLongOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseHalfOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseHalfOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseBoolOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseBoolOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDateTimeOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDateTimeOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDateOnlyOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseDateOnlyOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseTimeOnlyOrNone(System.String)">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ParseTimeOnlyOrNone(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns Some of parsed value from <paramref name="text"/> if succeeds; None if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Ok">
+            <summary>
+            Creates Ok result.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err(System.String)">
+            <summary>
+            Creates an Err result with the given <paramref name="errorMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err(System.String,System.String)">
+            <summary>
+            Creates an Err result occured during <paramref name="when"/> with the given <paramref name="errorMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err(System.Exception)">
+            <summary>
+            Creates an Err result with the given <paramref name="exception"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err(System.Exception,System.String)">
+            <summary>
+            Creates an Err result occured during <paramref name="when"/> with the given <paramref name="exception"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Ok``1(``0)">
+            <summary>
+            Creates Ok of <typeparamref name="T"/> with the given <paramref name="value"/>.
+            Note that 'null' is not allowed and automatically mapped to Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err``1(System.String)">
+            <summary>
+            Creates an Err result with the given <paramref name="errorMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err``1(System.String,System.String)">
+            <summary>
+            Creates an Err result occured during <paramref name="when"/> with the given <paramref name="errorMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err``1(System.Exception)">
+            <summary>
+            Creates an Err result with the given <paramref name="exception"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Err``1(System.Exception,System.String)">
+            <summary>
+            Creates an Err result occured during <paramref name="when"/> with the given <paramref name="exception"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ResFromStatus(System.Boolean,System.String)">
+            <summary>
+            Creates a result: Ok if <paramref name="successCondition"/> is true; Err with the given <paramref name="failureMessage"/> if false.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ResFromStatus(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Creates a result: Ok if <paramref name="httpStatusCode"/> is 200-OK; Err with the given <paramref name="failureMessage"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ResFromStatus(System.Net.Http.HttpResponseMessage,System.String)">
+            <summary>
+            Returns Ok(<paramref name="response"/>) if response.StatusCode is 200-OK; Err with the given <paramref name="failureMessage"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ResFromStatus(Fun.Res{System.Net.Http.HttpResponseMessage},System.String)">
+            <summary>
+            Returns back <paramref name="result"/> if result.IsOk and StatusCode of the HttpResponseMessage is 200-OK; Err with the given <paramref name="failureMessage"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AsRes``1(Fun.Opt{``0},System.String)">
+            <summary>
+            Converts Opt to Res: maps <paramref name="maybe"/> to Ok of its value when IsSome; to Err when IsNone.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.AsRes``1(Fun.Res{``0})">
+            <summary>
+            Converts Res of T to just Res; error message is transferred when IsErr; value is forgotten when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ToRes``1(``0)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Ok``1(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ToRes``1(``0,System.Func{``0,System.Boolean})">
+            <summary>
+            Returns Ok(<paramref name="value"/>) if <paramref name="validator"/>(<paramref name="value"/>) returns true; Err otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ToRes``1(``0,System.Func{``0,Fun.Opt{System.String}})">
+            <summary>
+            Returns Ok(<paramref name="value"/>) if <paramref name="validator"/>(<paramref name="value"/>) returns true; Err with the error message returned by the validator otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfErr(Fun.Res)">
+            <summary>
+            Does nothing and returns itself when <paramref name="result"/> IsOk; throws when IsErr.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfErr(Fun.Res,System.String)">
+            <summary>
+            Does nothing and returns itself when <paramref name="result"/> IsOk; throws with the given additional <paramref name="errorMessage"/> when IsErr.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogIfErr(Fun.Res)">
+            <summary>
+            Does nothing when <paramref name="result"/> IsOk; logs its <see cref="P:Fun.Res.ErrorMessage"/> when IsErr.
+            Returns itself.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogIfErr(Fun.Res,System.String)">
+            <summary>
+            Does nothing when <paramref name="result"/> IsOk; logs its <see cref="P:Fun.Res.ErrorMessage"/> with th additional <paramref name="errorMessage"/> when IsErr.
+            Returns itself.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Log(Fun.Res,System.String)">
+            <summary>
+            Logs the <paramref name="result"/> of the <paramref name="operationName"/>; whether Ok or Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogWithTime(Fun.Res,System.String,System.String)">
+            <summary>
+            Logs the <paramref name="result"/> of the <paramref name="operationName"/> with timestamp using given <paramref name="timeFormat"/>; whether Ok or Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunIfErr(Fun.Res,System.Action)">
+            <summary>
+            Does nothing when <paramref name="result"/> IsOk; runs the given <paramref name="action"/> when IsErr.
+            Returns itself.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfErr``1(Fun.Res{``0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.ThrowIfErr(Fun.Res)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.ThrowIfErr``1(Fun.Res{``0},System.String)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.ThrowIfErr(Fun.Res,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogIfErr``1(Fun.Res{``0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.LogIfErr(Fun.Res)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogIfErr``1(Fun.Res{``0},System.String)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.LogIfErr(Fun.Res,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Log``1(Fun.Res{``0},System.String)">
+            <summary>
+            Logs the <paramref name="result"/> of the <paramref name="operationName"/>; whether Ok or Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.LogWithTime``1(Fun.Res{``0},System.String,System.String)">
+            <summary>
+            Logs the <paramref name="result"/> of the <paramref name="operationName"/> with timestamp using given <paramref name="timeFormat"/>; whether Ok or Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunIfErr``1(Fun.Res{``0},System.Action)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.RunIfErr(Fun.Res,System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res,``0,System.Func{System.String,``0})">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/> whenever result.IsOk; and into <paramref name="err"/>(result.ErrorMessage.Unwrap()) otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res,System.Func{``0},System.Func{System.String,``0})">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/>() whenever result.IsOk; and into <paramref name="err"/>(result.ErrorMessage.Unwrap()) otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res,``0,``0)">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/> whenever result.IsOk; and into <paramref name="err"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res,System.Func{``0},``0)">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/>() whenever result.IsOk; and into <paramref name="err"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match(Fun.Res,System.Action,System.Action{System.String})">
+            <summary>
+            Executes <paramref name="ok"/>() whenever <paramref name="result"/>.IsOk; <paramref name="err"/>(result.ErrorMessage.Unwrap()) otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match(Fun.Res,System.Action,System.Action)">
+            <summary>
+            Executes <paramref name="ok"/>() whenever <paramref name="result"/>.IsOk; <paramref name="err"/>() otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``2(Fun.Res{``0},System.Func{``0,``1},System.Func{System.String,``1})">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/>(result.Unwrap()) whenever result.IsOk; and into <paramref name="err"/>(result.ErrorMessage.Unwrap()) otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``2(Fun.Res{``0},System.Func{``0,``1},``1)">
+            <summary>
+            Maps <paramref name="result"/> into <paramref name="ok"/>(result.Unwrap()) whenever result.IsOk; and into <paramref name="err"/> otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res{``0},System.Action{``0},System.Action{System.String})">
+            <summary>
+            Executes <paramref name="ok"/>(result.Unwrap()) whenever <paramref name="result"/>.IsOk; <paramref name="err"/>(result.ErrorMessage.Unwrap()) otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Match``1(Fun.Res{``0},System.Action{``0},System.Action)">
+            <summary>
+            Executes <paramref name="ok"/>(result.Unwrap()) whenever <paramref name="result"/>.IsOk; <paramref name="err"/>() otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Run(Fun.Res,System.Action)">
+            <summary>
+            Runs <paramref name="action"/>() only if result.IsOk, and returns back <paramref name="result"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Run``1(Fun.Res{``0},System.Action)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Run(Fun.Res,System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Run``1(Fun.Res{``0},System.Action{``0})">
+            <summary>
+            Runs <paramref name="action"/>(<paramref name="result"/>.Unwrap()) only if result.IsOk, and returns back <paramref name="result"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try(System.Action)">
+            <summary>
+            Runs the <paramref name="action"/> within a try-catch block.
+            Returns Ok if succeeds; Err with corresponding message if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try(Fun.Res,System.Action)">
+            <summary>
+            Does nothing and returns back <paramref name="result"/> when already result.IsErr.
+            When returns.IsOk; runs the <paramref name="action"/> within a try-catch block; returns Ok if succeeds; Err with corresponding message if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try``1(Fun.Res{``0},System.Action)">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try(Fun.Res,System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try``1(Fun.Opt{``0},System.Action)">
+            <summary>
+            Does nothing and returns and returns Err when already <paramref name="maybe"/>.IsNone.
+            When maybe.IsSome; runs the <paramref name="action"/> within a try-catch block; returns Ok if succeeds; Err with corresponding message if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try``1(Fun.Res{``0},System.Action{``0})">
+            <summary>
+            Does nothing and returns back <paramref name="result"/> when already result.IsErr.
+            When returns.IsOk; runs the <paramref name="action"/>(result.Unwrap()) within a try-catch block; returns Ok if succeeds; Err with corresponding message if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Try``1(Fun.Opt{``0},System.Action{``0})">
+            <summary>
+            Does nothing and returns and returns Err when already <paramref name="maybe"/>.IsNone.
+            When maybe.IsSome; runs the <paramref name="action"/>(maybe.Unwrap()) within a try-catch block; returns Ok if succeeds; Err with corresponding message if fails.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map(Fun.Res,System.Func{Fun.Res})">
+            <summary>
+            Returns back <paramref name="result"/> when IsErr; returns <paramref name="map"/>() when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``1(Fun.Res,System.Func{``0})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeref name="TOut"/> when IsErr; returns Ok(<paramref name="map"/>()) when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``1(Fun.Res,System.Func{Fun.Res{``0}})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeparam name="TOut"/> when IsErr; returns <paramref name="map"/>() when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``1(Fun.Res{``0},System.Func{Fun.Res})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map(Fun.Res,System.Func{Fun.Res})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``1(Fun.Res{``0},System.Func{``0,Fun.Res})">
+            <summary>
+            Returns back <paramref name="result"/> when IsErr; returns <paramref name="map"/>(result.Unwrap()) when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``1})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns Ok(<paramref name="map"/>()) when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``0,``1})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns Ok(<paramref name="map"/>(result.Unwrap())) when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{Fun.Res{``1}})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns <paramref name="map"/>() when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``0,Fun.Res{``1}})">
+            <summary>
+            Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns <paramref name="map"/>(result.Unwrap()) when IsOk.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{Fun.Res{``1}})">
+            <summary>
+            Returns Err when <paramref name="maybe"/> IsNone; <paramref name="map"/>() when IsSome.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,Fun.Res{``1}})">
+            <summary>
+            Returns Err when <paramref name="maybe"/> IsNone; <paramref name="map"/>(maybe.Unwrap()) when IsSome.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(System.Func{``0})">
+            <summary>
+            Tries to return Ok(<paramref name="map"/>()), but returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(System.Func{Fun.Res{``0}})">
+            <summary>
+            Tries to return <paramref name="map"/>(), but returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(System.Func{Fun.Opt{``0}})">
+            <summary>
+            Tries to return <paramref name="map"/>().ToRes(), but returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{``1})">
+            <summary>
+            Tries to return Ok(<paramref name="map"/>()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{Fun.Res{``1}})">
+            <summary>
+            Tries to return <paramref name="map"/>(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{Fun.Opt{``1}})">
+            <summary>
+            Tries to return <paramref name="map"/>().ToRes(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,``1})">
+            <summary>
+            Tries to return Ok(<paramref name="map"/>(<paramref name="value"/>)); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,Fun.Res{``1}})">
+            <summary>
+            Tries to return <paramref name="map"/>(<paramref name="value"/>); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,Fun.Opt{``1}})">
+            <summary>
+            Tries to return <paramref name="map"/>(<paramref name="value"/>).ToRes(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap(Fun.Res,System.Func{Fun.Res})">
+            <summary>
+            Returns back <paramref name="result"/> when IsErr.
+            When IsOk, tries to return <paramref name="map"/>(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{``0})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return Ok(<paramref name="map"/>()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{Fun.Res{``0}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return <paramref name="map"/>(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{Fun.Opt{``0}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return ToRes(<paramref name="map"/>()); returns Err if the method throws.
+            Note that ToRes maps Some to Ok, and None to Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``1})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return Ok(<paramref name="map"/>()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{Fun.Res{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return <paramref name="map"/>(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``0,``1})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return Ok(<paramref name="map"/>()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``0,Fun.Res{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="result"/> IsErr.
+            When IsOk, tries to return <paramref name="map"/>(result.Unwrap()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``1})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return Ok(<paramref name="map"/>()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{Fun.Opt{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return <paramref name="map"/>().ToRes(); returns Err if the method throws.
+            Note that ToRes maps Some to Ok, and None to Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{Fun.Res{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return <paramref name="map"/>(); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,``1})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return Ok(<paramref name="map"/>(maybe.Unwrap())); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,Fun.Opt{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return <paramref name="map"/>(maybe.Unwrap()).ToRes(); returns Err if the method throws.
+            Note that ToRes maps Some to Ok, and None to Err.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,Fun.Res{``1}})">
+            <summary>
+            Returns Err of <typeref name="TOut"/> when <paramref name="maybe"/> IsNone.
+            When IsSome, tries to return <paramref name="map"/>(maybe.Unwrap()); returns Err if the method throws.
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(Fun.Res{``0},System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Run``1(Fun.Opt{``0},System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.RunAsync``1(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Run``1(Fun.Res{``0},System.Action{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try(System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync(Fun.Res,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try(Fun.Res,System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync``1(Fun.Res{``0},System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try``1(Fun.Res{``0},System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync``1(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try``1(Fun.Opt{``0},System.Action)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync``1(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try``1(Fun.Opt{``0},System.Action{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryAsync``1(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Try``1(Fun.Opt{``0},System.Action{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync(Fun.Res,System.Func{System.Threading.Tasks.Task{Fun.Res}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map(Fun.Res,System.Func{Fun.Res})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``1(Fun.Res,System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``1(Fun.Res,System.Func{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``1(Fun.Res,System.Func{System.Threading.Tasks.Task{Fun.Res{``0}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``1(Fun.Res,System.Func{Fun.Res{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``1(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{Fun.Res}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map(Fun.Res,System.Func{Fun.Res})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``1(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Res}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``1(Fun.Res{``0},System.Func{``0,Fun.Res})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Res{``0},System.Func{``0,Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.MapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.Map``2(Fun.Opt{``0},System.Func{``0,Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(System.Func{System.Threading.Tasks.Task{Fun.Res{``0}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{Fun.Res{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(System.Func{System.Threading.Tasks.Task{Fun.Opt{``0}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{Fun.Opt{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{Fun.Res{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(System.Func{Fun.Opt{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{``0,System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(``0,System.Func{``0,System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(``0,System.Func{``0,Fun.Opt{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync(Fun.Res,System.Func{System.Threading.Tasks.Task{Fun.Res}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap(Fun.Res,System.Func{Fun.Res})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(Fun.Res,System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{``0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(Fun.Res,System.Func{System.Threading.Tasks.Task{Fun.Res{``0}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{Fun.Res{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``1(Fun.Res,System.Func{System.Threading.Tasks.Task{Fun.Opt{``0}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``1(Fun.Res,System.Func{Fun.Opt{``0}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="!:TryMap&lt;T, TOut&gt;(Res&lt;T&gt;, Func&lt;Opt&lt;TOut&gt;&gt;)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Res{``0},System.Func{``0,Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Res{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="!:TryMap&lt;T, TOut&gt;(Res&lt;T&gt;, Func&lt;T, Opt&lt;TOut&gt;&gt;)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{Fun.Opt{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Opt{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,Fun.Opt{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.TryMapAsync``2(Fun.Opt{``0},System.Func{``0,System.Threading.Tasks.Task{Fun.Res{``1}}})">
+            <summary>
+            <inheritdoc cref="M:Fun.Extensions.TryMap``2(Fun.Opt{``0},System.Func{``0,Fun.Res{``1}})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Extensions.Validate``1(``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            Returns Ok(<paramref name="value"/>) if <paramref name="validator"/>(<paramref name="value"/>) returns true; Err(<paramref name="errorMessage"/>) otherwise.
+            </summary>
+        </member>
+        <member name="T:Fun.Opt`1">
+            <summary>
+            Immutable option type which can either be Some or None.
+            When the state <see cref="F:Fun.Opt`1.IsSome"/>, the option holds the valid value which can be extracted by <see cref="M:Fun.Opt`1.Unwrap"/> (or <see cref="M:Fun.Opt`1.Unwrap(`0)"/>) methods.
+            </summary>
+        </member>
+        <member name="P:Fun.Opt`1.IsNone">
+            <summary>
+            True if the option is None.
+            </summary>
+        </member>
+        <member name="F:Fun.Opt`1.IsSome">
+            <summary>
+            True if the option is Some value, which can be obtained by <see cref="M:Fun.Opt`1.Unwrap"/> or <see cref="M:Fun.Opt`1.Unwrap(`0)"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.#ctor">
+            <summary>
+            Option type of <typeparamref name="T"/>: either None or Some value.
+            Parameterless ctor returns None; use 'Fun.Extensions.Some' or `Fun.Extensions.None` to construct options.
+            Better to add `using static Fun.Extensions` and use `Some` and `None` directly.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Implicit(`0)~Fun.Opt{`0}">
+            <summary>
+            Implicitly converts to <paramref name="value"/> into <see cref="T:Fun.Opt`1"/>.Some(<paramref name="value"/>).
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Unwrap">
+            <summary>
+            Returns the value when <see cref="F:Fun.Opt`1.IsSome"/>; or throws when <see cref="P:Fun.Opt`1.IsNone"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Unwrap(`0)">
+            <summary>
+            Returns the value when <see cref="F:Fun.Opt`1.IsSome"/>; or returns the <paramref name="fallbackValue"/> when <see cref="P:Fun.Opt`1.IsNone"/>.
+            </summary>
+            <param name="fallbackValue"></param>
+        </member>
+        <member name="M:Fun.Opt`1.Unwrap(System.Func{`0})">
+            <summary>
+            Returns the value when <see cref="F:Fun.Opt`1.IsSome"/>; or returns <paramref name="lazyFallbackValue"/>() when <see cref="P:Fun.Opt`1.IsNone"/>.
+            </summary>
+            <param name="lazyFallbackValue"></param>
+        </member>
+        <member name="M:Fun.Opt`1.Unwrap(System.Func{System.Threading.Tasks.Task{`0}})">
+            <summary>
+            Returns the value when <see cref="F:Fun.Opt`1.IsSome"/>; or returns <paramref name="lazyFallbackValue"/>() when <see cref="P:Fun.Opt`1.IsNone"/>.
+            </summary>
+            <param name="lazyFallbackValue"></param>
+        </member>
+        <member name="M:Fun.Opt`1.UnwrapOrThrow(System.String)">
+            <summary>
+            Returns the value when <see cref="F:Fun.Opt`1.IsSome"/>; throws with the given <paramref name="errorMessage"/> when <see cref="P:Fun.Opt`1.IsNone"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.ToString">
+            <summary>
+            Returns the text representation of the option.
+            /// </summary>
+        </member>
+        <member name="M:Fun.Opt`1.ToString(System.String)">
+            <summary>
+            Returns the text representation of the option; value will be <paramref name="format"/>ted when <see cref="F:Fun.Opt`1.IsSome"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},Fun.Opt{`0})">
+            <summary>
+            Returns true if both values are <see cref="F:Fun.Opt`1.IsSome"/> and their unwrapped values are equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Inequality(Fun.Opt{`0},Fun.Opt{`0})">
+            <summary>
+            Returns true if either value <see cref="P:Fun.Opt`1.IsNone"/> or their unwrapped values are not equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},`0)">
+            <summary>
+            Returns true if lhs <see cref="F:Fun.Opt`1.IsSome"/> and its unwrapped value is equal to the rhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Inequality(Fun.Opt{`0},`0)">
+            <summary>
+            Returns true if lhs <see cref="P:Fun.Opt`1.IsNone"/> or its unwrapped value is not equal to the rhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Equality(`0,Fun.Opt{`0})">
+            <summary>
+            Returns true if rhs <see cref="F:Fun.Opt`1.IsSome"/> and its unwrapped value is equal to the lhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Inequality(`0,Fun.Opt{`0})">
+            <summary>
+            Returns true if rhs <see cref="P:Fun.Opt`1.IsNone"/> or its unwrapped value is not equal to the lhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},Fun.Res{`0})">
+            <summary>
+            Returns true if lhs.IsSome and rhs.IsOk and their unwrapped values are equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.op_Inequality(Fun.Opt{`0},Fun.Res{`0})">
+            <summary>
+            Returns true if lhs.IsNone and rhs.IsErr and their unwrapped values are not equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Equals(System.Object)">
+            <summary>
+            Returns whether this option is equal to the <paramref name="obj"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Equals(Fun.Opt{`0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},Fun.Opt{`0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Equals(Fun.Res{`0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},Fun.Res{`0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Opt`1.Equals(`0)">
+            <summary>
+            <inheritdoc cref="M:Fun.Opt`1.op_Equality(Fun.Opt{`0},`0)"/>
+            </summary>
+        </member>
+        <member name="T:Fun.Res">
+            <summary>
+            Immutable result type which can either be Ok or Err.
+            When the state <see cref="P:Fun.Res.IsErr"/>, the result further holds Some <see cref="P:Fun.Res.ErrorMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Fun.Res.IsOk">
+            <summary>
+            True if the result is Ok; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Fun.Res.IsErr">
+            <summary>
+            True if the result is Err; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Fun.Res.ErrorMessage">
+            <summary>
+            Returns the underlying error message which is Some when the result <see cref="P:Fun.Res.IsErr"/>; None when <see cref="P:Fun.Res.IsOk"/>;
+            </summary>
+        </member>
+        <member name="M:Fun.Res.#ctor">
+            <summary>
+            Result type which can either be Ok or Err.
+            Parameterless ctor returns Ok; use 'Fun.Extensions.Ok' or `Fun.Extensions.Err` to construct options.
+            Better to add `using static Fun.Extensions` and use `Ok` and `Err` directly.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.MsgIfErr(System.String)">
+            <summary>
+            Appends the provided <paramref name="errorMessage"/> if the result <see cref="P:Fun.Res.IsErr"/>.
+            Does nothing when <see cref="P:Fun.Res.IsOk"/>.
+            Returns self.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.MsgIfErr(System.String,System.String)">
+            <summary>
+            Appends the provided <paramref name="errorMessage"/> related to the operation at <paramref name="when"/> if the result <see cref="P:Fun.Res.IsErr"/>.
+            Does nothing when <see cref="P:Fun.Res.IsOk"/>.
+            Returns self.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.ToString">
+            <summary>
+            Converts the option to its equivalent string representation.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.Equals(Fun.Res)">
+            <summary>
+            Returns whether this result is equal to the <paramref name="other"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.op_Equality(Fun.Res,Fun.Res)">
+            <summary>
+            Returns whether <paramref name="first"/> is equal to <paramref name="second"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.op_Inequality(Fun.Res,Fun.Res)">
+            <summary>
+            Returns whether <paramref name="first"/> is not equal to <paramref name="second"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.Equals(System.Object)">
+            <summary>
+            Returns whether this result is equal to the <paramref name="obj"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+        </member>
+        <member name="T:Fun.Res`1">
+            <summary>
+            Immutable result type which can either be Ok or Err.
+            When the state <see cref="P:Fun.Res`1.IsOk"/>, the result holds the valid value which can be extracted by <see cref="M:Fun.Res`1.Unwrap"/> (or <see cref="M:Fun.Res`1.Unwrap(`0)"/>) methods.
+            When the state <see cref="P:Fun.Res`1.IsErr"/>, the result further holds Some <see cref="P:Fun.Res`1.ErrorMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Fun.Res`1.IsOk">
+            <summary>
+            True if the result is Ok; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Fun.Res`1.IsErr">
+            <summary>
+            True if the result is Err; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Fun.Res`1.ErrorMessage">
+            <summary>
+            Returns the underlying error message if <see cref="P:Fun.Res`1.IsErr"/>; None if <see cref="P:Fun.Res`1.IsOk"/>;
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.#ctor">
+            <summary>
+            Parameterless ctor returns Err("not-initialized"), and hence, is not useful!
+            Use 'Fun.Extensions.Ok' or `Fun.Extensions.Err` to construct options.
+            Better to add `using static Fun.Extensions` and use `Ok` and `Err` directly.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Implicit(`0)~Fun.Res{`0}">
+            <summary>
+            Implicitly converts to <paramref name="value"/> into <see cref="T:Fun.Res`1"/>.Ok(<paramref name="value"/>).
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Unwrap">
+            <summary>
+            Returns the value when <see cref="P:Fun.Res`1.IsOk"/>; or throws when <see cref="P:Fun.Res`1.IsErr"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Unwrap(`0)">
+            <summary>
+            Returns the value when <see cref="P:Fun.Res`1.IsOk"/>; or returns the <paramref name="fallbackValue"/> when <see cref="P:Fun.Res`1.IsErr"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Unwrap(System.Func{`0})">
+            <summary>
+            Returns the value when <see cref="P:Fun.Res`1.IsOk"/>; or returns <paramref name="lazyFallbackValue"/>() when <see cref="P:Fun.Res`1.IsErr"/>.
+            </summary>
+            <param name="lazyFallbackValue"></param>
+        </member>
+        <member name="M:Fun.Res`1.Unwrap(System.Func{System.Threading.Tasks.Task{`0}})">
+            <summary>
+            Returns the value when <see cref="P:Fun.Res`1.IsOk"/>; or returns <paramref name="lazyFallbackValue"/>() when <see cref="P:Fun.Res`1.IsErr"/>.
+            </summary>
+            <param name="lazyFallbackValue"></param>
+        </member>
+        <member name="M:Fun.Res`1.MsgIfErr(System.String)">
+            <summary>
+            <inheritdoc cref="M:Fun.Res.MsgIfErr(System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.MsgIfErr(System.String,System.String)">
+            <summary>
+            <inheritdoc cref="M:Fun.Res.MsgIfErr(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.ToString">
+            <summary>
+            Returns the text representation of the option.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.ToString(System.String)">
+            <summary>
+            Returns the text representation of the result; value will be <paramref name="format"/>ted when <see cref="P:Fun.Res`1.IsOk"/>.
+            </summary>
+            <param name="format">Determines whether the error log wil be detailed or not.</param>
+        </member>
+        <member name="M:Fun.Res`1.op_Equality(Fun.Res{`0},Fun.Res{`0})">
+            <summary>
+            Returns true if both values are <see cref="P:Fun.Res`1.IsOk"/> and their unwrapped values are equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Inequality(Fun.Res{`0},Fun.Res{`0})">
+            <summary>
+            Returns true if either value <see cref="P:Fun.Res`1.IsErr"/> or their unwrapped values are not equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Equality(Fun.Res{`0},`0)">
+            <summary>
+            Returns true if lhs <see cref="P:Fun.Res`1.IsOk"/> and its unwrapped value is equal to the rhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Inequality(Fun.Res{`0},`0)">
+            <summary>
+            Returns true if lhs <see cref="P:Fun.Res`1.IsErr"/> or its unwrapped value is not equal to the rhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Equality(`0,Fun.Res{`0})">
+            <summary>
+            Returns true if rhs <see cref="P:Fun.Res`1.IsOk"/> and its unwrapped value is equal to the lhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Inequality(`0,Fun.Res{`0})">
+            <summary>
+            Returns true if rhs <see cref="P:Fun.Res`1.IsErr"/> or its unwrapped value is not equal to the lhs; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Equality(Fun.Res{`0},Fun.Opt{`0})">
+            <summary>
+            Returns true if rhs.IsSome and lhs.IsOk and their unwrapped values are equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.op_Inequality(Fun.Res{`0},Fun.Opt{`0})">
+            <summary>
+            Returns true if rhs.IsNone and lhs.IsErr and their unwrapped values are not equal; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Equals(System.Object)">
+            <summary>
+            Returns whether this result is equal to the <paramref name="obj"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Equals(Fun.Res{`0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Res`1.op_Equality(Fun.Res{`0},Fun.Res{`0})"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Equals(`0)">
+            <summary>
+            <inheritdoc cref="M:Fun.Res`1.op_Equality(Fun.Res{`0},`0)"/>
+            </summary>
+        </member>
+        <member name="M:Fun.Res`1.Equals(Fun.Opt{`0})">
+            <summary>
+            <inheritdoc cref="M:Fun.Res`1.op_Equality(Fun.Res{`0},Fun.Opt{`0})"/>
+            </summary>
+        </member>
+    </members>
+</doc>

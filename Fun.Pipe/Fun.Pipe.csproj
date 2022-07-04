@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Fun</RootNamespace>
+    <PackageId>Fun.Pipe</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>mostlyfun</Authors>
+    <Company>mostlyfun</Company>
+    <Description>Functional option and result types, and pipe methods for csharp to allow for concise and expressive method chaining.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mostlyfun/fun-pipe-csharp</RepositoryUrl>
+    <RespositoryType>git</RespositoryType>
+    <PackageTags>Pipe, Chain, Option, Result, Function, Functional, Lambda</PackageTags>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\uarikan\Documents\GitHub\fun-pipe-csharp\src\Fun.Pipe\Fun.Pipe\Fun.Pipe.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
