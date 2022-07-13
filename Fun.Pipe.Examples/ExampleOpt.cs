@@ -151,8 +151,6 @@ public static class ExampleOpt
         
         Assert(Some(12.42) == 12.42);               // implicit equality with value
         Assert(Some(12.42) != 42.12);               // implicit equality with value
-        Assert(Some(12.42) == Ok(12.42));           // implicit equality with Ok of T (Res)
-        Assert(Some(12.42) != Ok(42.12));           // implicit equality with Ok of T (Res)
 
 
         // Opt for optional parameters

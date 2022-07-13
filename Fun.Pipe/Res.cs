@@ -9,7 +9,7 @@ namespace Fun;
 public readonly struct Res : IEquatable<Res>
 {
     // Data
-    readonly string errorMessage;
+    readonly string? errorMessage;
     // Prop
     /// <summary>
     /// True if the result is Ok; false otherwise.
@@ -42,11 +42,11 @@ public readonly struct Res : IEquatable<Res>
     /// </summary>
     public Res()
     {
-        errorMessage = "default-ctor-error";
+        errorMessage = null;
     }
     internal Res(string errorMessage) => this.errorMessage = errorMessage;
-    internal Res(string errorMessage, string when) => this.errorMessage = GetErrorMessage(errorMessage, when);
-    internal Res(Exception exception, string when) => errorMessage = GetExceptionMessage(exception, when);
+    internal Res(string errorMessage, string? when) => this.errorMessage = GetErrorMessage(errorMessage, when);
+    internal Res(Exception exception, string? when) => errorMessage = GetExceptionMessage(exception, when);
 
 
     // Method
@@ -100,24 +100,24 @@ public readonly struct Res : IEquatable<Res>
     /// <summary>
     /// Returns whether this result is equal to the <paramref name="obj"/>.
     /// </summary>
-    public override bool Equals(object obj)
-        => (obj is Res) && (this == (Res)obj);
+    public override bool Equals(object? obj)
+        => obj != null && (obj is Res) && (this == (Res)obj);
     /// <summary>
     /// Serves as the default hash function.
     /// </summary>
     public override int GetHashCode()
-        => IsErr ? errorMessage.GetHashCode() : int.MaxValue;
+        => errorMessage != null ? errorMessage.GetHashCode() : int.MaxValue;
 
 
     // Method Helper
     const string patternStackTrace = @"( at )|( in )|(:line )";
-    internal static string GetErrorMessage(string errorMessage, string when)
+    internal static string GetErrorMessage(string? errorMessage, string? when)
     {
         if (errorMessage == null)
             errorMessage = string.Empty;
         return when == null ? errorMessage : string.Format("[{0}] {1}", when, errorMessage);
     }
-    internal static string GetExceptionMessage(Exception exception, string when)
+    internal static string GetExceptionMessage(Exception exception, string? when)
     {
         var sb = new StringBuilder();
 

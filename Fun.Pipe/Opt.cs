@@ -4,10 +4,10 @@ namespace Fun;
 /// Immutable option type which can either be Some or None.
 /// When the state <see cref="IsSome"/>, the option holds the valid value which can be extracted by <see cref="Unwrap()"/> (or <see cref="Unwrap(T)"/>) methods.
 /// </summary>
-public readonly struct Opt<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Res<T>>
+public readonly struct Opt<T> : IEquatable<Opt<T>>
 {
     // Data
-    internal readonly T value;
+    internal readonly T? value;
     /// <summary>
     /// True if the option is None.
     /// </summary>
@@ -108,7 +108,7 @@ public readonly struct Opt<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Re
     /// Returns the text representation of the option.
     /// /// </summary>
     public override string ToString()
-        => IsNone ? "None" : $"Some({value})";
+        => IsNone ? "None" : string.Format("Some({0})", value);
     /// <summary>
     /// Returns the text representation of the option; value will be <paramref name="format"/>ted when <see cref="IsSome"/>.
     /// </summary>
@@ -117,74 +117,34 @@ public readonly struct Opt<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Re
         if (IsNone)
             return "None";
         var method = typeof(T).GetMethod(nameof(ToString), new[] { typeof(string) });
-        if (method == null)
-            return $"Some({value})";
-        string strValue = (string)method.Invoke(value, new[] { format });
-        return $"Some({strValue})";
+        if (method != null)
+            return string.Format("Some({0})", (string?)method.Invoke(value, new[] { format })); 
+        else
+            return string.Format("Some({0})", value);
     }
     /// <summary>
     /// Returns true if both values are <see cref="IsSome"/> and their unwrapped values are equal; false otherwise.
     /// </summary>
     public static bool operator ==(Opt<T> first, Opt<T> second)
-        => first.IsSome && second.IsSome && first.value.Equals(second.value);
+        => first.value != null && second.value != null && first.value.Equals(second.value);
     /// <summary>
     /// Returns true if either value <see cref="IsNone"/> or their unwrapped values are not equal; false otherwise.
     /// </summary>
     public static bool operator !=(Opt<T> first, Opt<T> second)
-        => first.IsNone || second.IsNone || !first.value.Equals(second.value);
-    /// <summary>
-    /// Returns true if lhs <see cref="IsSome"/> and its unwrapped value is equal to the rhs; false otherwise.
-    /// </summary>
-    public static bool operator ==(Opt<T> first, T second)
-        => first.IsSome && first.value.Equals(second);
-    /// <summary>
-    /// Returns true if lhs <see cref="IsNone"/> or its unwrapped value is not equal to the rhs; false otherwise.
-    /// </summary>
-    public static bool operator !=(Opt<T> first, T second)
-        => first.IsNone || !first.value.Equals(second);
-    /// <summary>
-    /// Returns true if rhs <see cref="IsSome"/> and its unwrapped value is equal to the lhs; false otherwise.
-    /// </summary>
-    public static bool operator ==(T first, Opt<T> second)
-        => second.IsSome && second.value.Equals(first);
-    /// <summary>
-    /// Returns true if rhs <see cref="IsNone"/> or its unwrapped value is not equal to the lhs; false otherwise.
-    /// </summary>
-    public static bool operator !=(T first, Opt<T> second)
-        => second.IsNone || !second.value.Equals(first);
-    /// <summary>
-    /// Returns true if lhs.IsSome and rhs.IsOk and their unwrapped values are equal; false otherwise.
-    /// </summary>
-    public static bool operator ==(Opt<T> first, Res<T> second)
-        => first.IsSome && second.IsOk && first.value.Equals(second.value);
-    /// <summary>
-    /// Returns true if lhs.IsNone and rhs.IsErr and their unwrapped values are not equal; false otherwise.
-    /// </summary>
-    public static bool operator !=(Opt<T> first, Res<T> second)
-        => first.IsNone || second.IsErr || !first.value.Equals(second.value);
+        => first.value == null || second.value == null || !first.value.Equals(second.value);
     /// <summary>
     /// Returns whether this option is equal to the <paramref name="obj"/>.
     /// </summary>
-    public override bool Equals(object obj)
-        => (obj is Opt<T>) && (this == (Opt<T>)obj);
+    public override bool Equals(object? obj)
+        => obj != null && (obj is Opt<T>) && (this == (Opt<T>)obj);
     /// <summary>
     /// Serves as the default hash function.
     /// </summary>
     public override int GetHashCode()
-        => IsNone ? int.MinValue : value.GetHashCode();
+        => value == null ? int.MinValue : value.GetHashCode();
     /// <summary>
     /// <inheritdoc cref="operator ==(Opt{T}, Opt{T})"/>
     /// </summary>
     public bool Equals(Opt<T> other)
-        => this == other;
-    /// <summary>
-    /// <inheritdoc cref="operator ==(Opt{T}, Res{T})"/>
-    /// </summary>
-    public bool Equals(Res<T> other)
-        => this == other;
-    /// <summary>
-    /// <inheritdoc cref="operator ==(Opt{T}, T)"/>
-    /// </summary>
-    public bool Equals(T other)
         => this == other;
 }

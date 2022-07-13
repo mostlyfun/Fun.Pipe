@@ -5,11 +5,11 @@ namespace Fun;
 /// When the state <see cref="IsOk"/>, the result holds the valid value which can be extracted by <see cref="Unwrap()"/> (or <see cref="Unwrap(T)"/>) methods.
 /// When the state <see cref="IsErr"/>, the result further holds Some <see cref="ErrorMessage"/>.
 /// </summary>
-public readonly struct Res<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Res<T>>
+public readonly struct Res<T> : IEquatable<Res<T>>
 {
     // Data
-    internal readonly T value;
-    readonly string errorMessage;
+    internal readonly T? value;
+    readonly string? errorMessage;
     // Prop
     /// <summary>
     /// True if the result is Ok; false otherwise.
@@ -66,12 +66,12 @@ public readonly struct Res<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Re
             errorMessage = null;
         }
     }
-    internal Res(string errorMessage, string when)
+    internal Res(string? errorMessage, string? when)
     {
         value = default;
         this.errorMessage = Res.GetErrorMessage(errorMessage, when);
     }
-    internal Res(Exception exception, string when)
+    internal Res(Exception exception, string? when)
     {
         value = default;
         errorMessage = Res.GetExceptionMessage(exception, when);
@@ -138,7 +138,7 @@ public readonly struct Res<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Re
     /// Returns the text representation of the option.
     /// </summary>
     public override string ToString()
-        => IsOk ? $"Ok{value}" : $"Err({errorMessage})";
+        => IsOk ? $"Ok({value})" : $"Err({errorMessage})";
     /// <summary>
     /// Returns the text representation of the result; value will be <paramref name="format"/>ted when <see cref="IsOk"/>.
     /// </summary>
@@ -148,74 +148,34 @@ public readonly struct Res<T> : IEquatable<T>, IEquatable<Opt<T>>, IEquatable<Re
         if (IsErr)
             return $"Err({errorMessage})";
         var method = typeof(T).GetMethod(nameof(ToString), new[] { typeof(string) });
-        if (method == null)
-            return $"Ok({value})";
-        string strValue = (string)method.Invoke(value, new[] { format });
-        return $"Ok({strValue})";
+        if (method != null)
+            return string.Format("Ok({0})", (string?)method.Invoke(value, new[] { format }));
+        else
+            return string.Format("Ok({0})", value);
     }
     /// <summary>
     /// Returns true if both values are <see cref="IsOk"/> and their unwrapped values are equal; false otherwise.
     /// </summary>
     public static bool operator ==(Res<T> first, Res<T> second)
-        => !first.IsErr && !second.IsErr && first.value.Equals(second.value);
+        => first.value != null && second.value != null && first.value.Equals(second.value);
     /// <summary>
     /// Returns true if either value <see cref="IsErr"/> or their unwrapped values are not equal; false otherwise.
     /// </summary>
     public static bool operator !=(Res<T> first, Res<T> second)
-        => first.IsErr || second.IsErr || !first.value.Equals(second.value);
-    /// <summary>
-    /// Returns true if lhs <see cref="IsOk"/> and its unwrapped value is equal to the rhs; false otherwise.
-    /// </summary>
-    public static bool operator ==(Res<T> first, T second)
-        => first.IsOk && first.value.Equals(second);
-    /// <summary>
-    /// Returns true if lhs <see cref="IsErr"/> or its unwrapped value is not equal to the rhs; false otherwise.
-    /// </summary>
-    public static bool operator !=(Res<T> first, T second)
-        => first.IsErr || !first.value.Equals(second);
-    /// <summary>
-    /// Returns true if rhs <see cref="IsOk"/> and its unwrapped value is equal to the lhs; false otherwise.
-    /// </summary>
-    public static bool operator ==(T first, Res<T> second)
-        => second.IsOk && second.value.Equals(first);
-    /// <summary>
-    /// Returns true if rhs <see cref="IsErr"/> or its unwrapped value is not equal to the lhs; false otherwise.
-    /// </summary>
-    public static bool operator !=(T first, Res<T> second)
-        => second.IsErr || !second.value.Equals(first);
-    /// <summary>
-    /// Returns true if rhs.IsSome and lhs.IsOk and their unwrapped values are equal; false otherwise.
-    /// </summary>
-    public static bool operator ==(Res<T> first, Opt<T> second)
-        => second.IsSome && first.IsOk && second.value.Equals(first.value);
-    /// <summary>
-    /// Returns true if rhs.IsNone and lhs.IsErr and their unwrapped values are not equal; false otherwise.
-    /// </summary>
-    public static bool operator !=(Res<T> first, Opt<T> second)
-        => second.IsNone || first.IsErr || !second.value.Equals(first.value);
+        => first.value == null || second.value == null || !first.value.Equals(second.value);
     /// <summary>
     /// Returns whether this result is equal to the <paramref name="obj"/>.
     /// </summary>
-    public override bool Equals(object obj)
-        => (obj is Res<T>) ? (this == (Res<T>)obj) : false;
+    public override bool Equals(object? obj)
+        => obj != null && (obj is Res<T> res) && (this == res);
     /// <summary>
     /// Serves as the default hash function.
     /// </summary>
     public override int GetHashCode()
-        => IsErr ? errorMessage.GetHashCode() : value.GetHashCode();
+        => errorMessage != null ? errorMessage.GetHashCode() : (value != null ? value.GetHashCode() : int.MaxValue);
     /// <summary>
     /// <inheritdoc cref="operator ==(Res{T}, Res{T})"/>
     /// </summary>
     public bool Equals(Res<T> other)
         => this == other;
-    /// <summary>
-    /// <inheritdoc cref="operator ==(Res{T}, T)"/>
-    /// </summary>
-    public bool Equals(T other)
-        => this == other;
-    /// <summary>
-    /// <inheritdoc cref="operator ==(Res{T}, Opt{T})"/>
-    /// </summary>
-    public bool Equals(Opt<T> other)
-        => IsOk && other.IsSome && value.Equals(other.value);
 }

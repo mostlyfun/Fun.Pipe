@@ -26,7 +26,7 @@ public static partial class Extensions
     /// Converts Res to Opt: maps <paramref name="result"/> to Some of its value when IsOk; to None when IsErr.
     /// </summary>
     public static Opt<T> AsOpt<T>(this Res<T> result)
-        => result.IsErr ? None<T>() : Some(result.value);
+        => result.value == null ? None<T>() : Some(result.value);
     // ToOpt - From Value
     /// <summary>
     /// <inheritdoc cref="Some{T}(T)"/>
@@ -79,7 +79,8 @@ public static partial class Extensions
     /// </summary>
     public static TOut Match<T, TOut>(this Opt<T> maybe, Func<T, TOut> some, Func<TOut> none)
     {
-        if (maybe.IsSome) return some(maybe.value);
+        if (maybe.value != null)
+            return some(maybe.value);
         else return none();
     }
     /// <summary>
@@ -87,7 +88,8 @@ public static partial class Extensions
     /// </summary>
     public static TOut Match<T, TOut>(this Opt<T> maybe, Func<T, TOut> some, TOut none)
     {
-        if (maybe.IsSome) return some(maybe.value);
+        if (maybe.value != null)
+            return some(maybe.value);
         else return none;
     }
     /// <summary>
@@ -95,7 +97,8 @@ public static partial class Extensions
     /// </summary>
     public static void Match<T>(this Opt<T> maybe, Action<T> some, Action none)
     {
-        if (maybe.IsSome) some(maybe.value);
+        if (maybe.value != null)
+            some(maybe.value);
         else none();
     }
 
@@ -110,7 +113,11 @@ public static partial class Extensions
     /// Runs <paramref name="action"/>(<paramref name="maybe"/>.Unwrap()) only if maybe.IsSome, and returns back <paramref name="maybe"/>.
     /// </summary>
     public static Opt<T> Run<T>(this Opt<T> maybe, Action<T> action)
-    { if (maybe.IsSome) action(maybe.value); return maybe; }
+    {
+        if (maybe.value != null)
+            action(maybe.value);
+        return maybe;
+    }
 
 
     // Map: Opt<t>->Opt<T>
@@ -123,32 +130,22 @@ public static partial class Extensions
     /// Returns None when <paramref name="maybe"/> IsNone; Some(<paramref name="map"/>(maybe.Unwrap())) when IsSome.
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<T, TOut> map)
-        => maybe.IsNone ? None<TOut>() : Some(map(maybe.value));
+        => maybe.value == null ? None<TOut>() : Some(map(maybe.value));
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{TOut})"/>
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<Opt<TOut>> map)
-        => maybe.IsNone ? None<TOut>() : map();
+        => maybe.value == null ? None<TOut>() : map();
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<T, Opt<TOut>> map)
-        => maybe.IsNone ? None<TOut>() : map(maybe.value);
+        => maybe.value == null ? None<TOut>() : map(maybe.value);
 
 
     #region ASYNC
 
     // Run
-    /// <summary>
-    /// <inheritdoc cref="Run{T}(T, Action)"/>
-    /// </summary>
-    public static Task<T> RunAsync<T>(this T value, Func<Task> action)
-    { action(); return Task.FromResult(value); }
-    /// <summary>
-    /// <inheritdoc cref="Run{T}(T, Action{T})"/>
-    /// </summary>
-    public static Task<T> RunAsync<T>(this T value, Func<T, Task> action)
-    { action(value); return Task.FromResult(value); }
     /// <summary>
     /// <inheritdoc cref="Run{T}(Opt{T}, Action)"/>
     /// </summary>
@@ -158,23 +155,7 @@ public static partial class Extensions
     /// <inheritdoc cref="Run{T}(Opt{T}, Action{T})"/>
     /// </summary>
     public static Task<Opt<T>> RunAsync<T>(this Opt<T> maybe, Func<T, Task> action)
-    { if (maybe.IsSome) action(maybe.value); return Task.FromResult(maybe); }
-
-
-    // Map: ()->T
-    /// <summary>
-    /// <inheritdoc cref="Map{TOut}(Func{TOut})"/>
-    /// </summary>
-    public static Task<TOut> MapAsync<TOut>(Func<Task<TOut>> map) 
-        => map();
-
-
-    // Map: t->T
-    /// <summary>
-    /// <inheritdoc cref="Map{T, TOut}(T, Func{T, TOut})"/>
-    /// </summary>
-    public static Task<TOut> MapAsync<T, TOut>(this T value, Func<T, Task<TOut>> map)
-        => map(value);
+    { if (maybe.value != null) action(maybe.value); return Task.FromResult(maybe); }
 
 
     // Map: Opt<t>->Opt<T>
@@ -187,17 +168,17 @@ public static partial class Extensions
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static async Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<T, Task<TOut>> map)
-        => maybe.IsNone ? None<TOut>() : Some(await map(maybe.value));
+        => maybe.value == null ? None<TOut>() : Some(await map(maybe.value));
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{TOut})"/>
     /// </summary>
     public static Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<Task<Opt<TOut>>> map)
-        => maybe.IsNone ? Task.FromResult(None<TOut>()) : map();
+        => maybe.value == null ? Task.FromResult(None<TOut>()) : map();
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<T, Task<Opt<TOut>>> map)
-        => maybe.IsNone ? Task.FromResult(None<TOut>()) : map(maybe.value);
+        => maybe.value == null ? Task.FromResult(None<TOut>()) : map(maybe.value);
 
     #endregion
 

@@ -44,12 +44,18 @@ public static partial class Extensions
     /// Opt counterpart of FirstOrDefault, which returns the first non-null element if <paramref name="enumerable"/> has any, None otherwise.
     /// </summary>
     public static Opt<T> FirstOrNone<T>(this IEnumerable<T> enumerable)
-        => Some(enumerable.FirstOrDefault(x => x != null));
+    {
+        var first = enumerable.FirstOrDefault(x => x != null);
+        return first == null ? default : Some(first);
+    }
     /// <summary>
     /// Opt counterpart of FirstOrDefault, which returns the first non-null element if <paramref name="enumerable"/> has any satisfying the <paramref name="predicate"/>, None otherwise.
     /// </summary>
     public static Opt<T> FirstOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
-        => Some(enumerable.FirstOrDefault(x => x != null && predicate(x)));
+    {
+        var drawn = enumerable.FirstOrDefault(x => x != null && predicate(x));
+        return drawn == null ? default : Some(drawn);
+    }
     // FirstSome
     /// <summary>
     /// Returns first IsSome element of the <paramref name="enumerable"/> if any, None otherwise.
@@ -79,12 +85,18 @@ public static partial class Extensions
     /// Opt counterpart of LastOrDefault, which returns the last non-null element if <paramref name="enumerable"/> has any, None otherwise.
     /// </summary>
     public static Opt<T> LastOrNone<T>(this IEnumerable<T> enumerable)
-        => Some(enumerable.LastOrDefault(x => x != null));
+    {
+        var drawn = enumerable.LastOrDefault(x => x != null);
+        return drawn == null ? default : Some(drawn);
+    }
     /// <summary>
     /// Opt counterpart of LastOrDefault, which returns the last non-null element if <paramref name="enumerable"/> has any satisfying the <paramref name="predicate"/>, None otherwise.
     /// </summary>
     public static Opt<T> LastOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
-        => Some(enumerable.LastOrDefault(x => x != null && predicate(x)));
+    {
+        var drawn = enumerable.LastOrDefault(x => x != null && predicate(x));
+        return drawn == null ? default : Some(drawn);
+    }
     // LastSome
     /// <summary>
     /// Returns last IsSome element of the <paramref name="enumerable"/> if any, None otherwise.
@@ -254,10 +266,22 @@ public static partial class Extensions
     /// Returns Some of value from <paramref name="dictionary"/> with the given <paramref name="key"/> if exists; None if the key is absent.
     /// </summary>
     public static Opt<TValue> GetValueOrNone<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
-    { bool s = dictionary.TryGetValue(key, out var val); return s ? Some(val) : None<TValue>(); }
+        where TKey: notnull
+    {
+        bool s = dictionary.TryGetValue(key, out var val);
+        if (val == null)
+            return default;
+        return s ? Some(val) : None<TValue>();
+    }
     /// <summary>
     /// Returns Some of value from <paramref name="dictionary"/> with the given <paramref name="key"/> if exists; None if the key is absent.
     /// </summary>
     public static Opt<TValue> GetValueOrNone<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
-    { bool s = dictionary.TryGetValue(key, out var val); return s ? Some(val) : None<TValue>(); }
+        where TKey : notnull
+    {
+        bool s = dictionary.TryGetValue(key, out var val);
+        if (val == null)
+            return default;
+        return s ? Some(val) : None<TValue>();
+    }
 }

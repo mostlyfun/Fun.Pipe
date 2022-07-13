@@ -168,8 +168,6 @@ public static class ExampleResT
 
         Assert(Ok(12.42) == 12.42);                             // implicit equality with value
         Assert(Ok(12.42) != 42.12);                             // implicit equality with value
-        Assert(Ok(12.42) == Some(12.42));                       // implicit equality with Some of T (Opt)
-        Assert(Ok(12.42) != Some(42.22));                       // implicit equality with Some of T (Opt)
 
 
         // Res<T> return for functions that can fail
