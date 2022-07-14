@@ -59,12 +59,13 @@ public static partial class Extensions
     /// </summary>
     public static Res<T> Err<T>(Exception exception, string when)
         => new(exception, when);
+    // ToErrOf
     /// <summary>
     /// Converts <paramref name="error"/> of <typeparamref name="T"/> into error of <typeparamref name="TOut"/>.
     /// Note that even if <paramref name="error"/> IsOk; the result will be an error.
     /// </summary>
-    public static Res<TOut> ErrFrom<T, TOut>(Res<T> error)
-        => new(error.ErrorMessage.Unwrap(), null);
+    public static Res<TOut> ToErrOf<T, TOut>(this Res<T> error)
+        => new(error.ErrorMessage.Unwrap(string.Empty), null);
 
 
     // New - ResFromStatus
@@ -87,7 +88,7 @@ public static partial class Extensions
     /// Returns back <paramref name="result"/> if result.IsOk and StatusCode of the HttpResponseMessage is 200-OK; Err with the given <paramref name="failureMessage"/> otherwise.
     /// </summary>
     public static Res<HttpResponseMessage> ResFromStatus(this Res<HttpResponseMessage> result, string failureMessage = "HttpStatusCode != OK")
-        => result.value == null ? new(result.ErrorMessage.value, null) : ResFromStatus(result.value, failureMessage);
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.value, null) : ResFromStatus(result.value, failureMessage);
 
 
     // ToRes
@@ -376,7 +377,7 @@ public static partial class Extensions
     /// </summary>
     public static Res Try<T>(this Res<T> result, Action action)
     {
-        if (result.value == null) new Res(result.ErrorMessage.Unwrap(), null);
+        if (result.IsErr || result.value == null) new Res(result.ErrorMessage.Unwrap(), null);
         try { action(); return Ok(); }
         catch (Exception e) { return new(e, null); }
     }
@@ -399,7 +400,7 @@ public static partial class Extensions
     /// </summary>
     public static Res Try<T>(this Res<T> result, Action<T> action)
     {
-        if (result.value == null) return new(result.ErrorMessage.Unwrap());
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.Unwrap());
         try { action(result.value); return Ok(); }
         catch (Exception e) { return new(e, null); }
     }
@@ -441,12 +442,12 @@ public static partial class Extensions
     /// <inheritdoc cref="Map(Res, Func{Res})"/>
     /// </summary>
     public static Res Map<T>(this Res<T> result, Func<Res> map)
-        => result.value == null ? new(result.ErrorMessage.Unwrap(), null) : map();
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.Unwrap(), null) : map();
     /// <summary>
     /// Returns back <paramref name="result"/> when IsErr; returns <paramref name="map"/>(result.Unwrap()) when IsOk.
     /// </summary>
     public static Res Map<T>(this Res<T> result, Func<T, Res> map)
-        => result.value == null ? new(result.ErrorMessage.Unwrap(), null) : map(result.value);
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.Unwrap(), null) : map(result.value);
     
     
     // Map: Res<t>->Res<T>
@@ -454,22 +455,22 @@ public static partial class Extensions
     /// Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns Ok(<paramref name="map"/>()) when IsOk.
     /// </summary>
     public static Res<TOut> Map<T, TOut>(this Res<T> result, Func<TOut> map)
-        => result.value == null ? new(result.ErrorMessage.value, null) : Ok(map());
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.value, null) : Ok(map());
     /// <summary>
     /// Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns Ok(<paramref name="map"/>(result.Unwrap())) when IsOk.
     /// </summary>
     public static Res<TOut> Map<T, TOut>(this Res<T> result, Func<T, TOut> map)
-        => result.value == null ? new(result.ErrorMessage.value, null) : Ok(map(result.value));
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.value, null) : Ok(map(result.value));
     /// <summary>
     /// Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns <paramref name="map"/>() when IsOk.
     /// </summary>
     public static Res<TOut> Map<T, TOut>(this Res<T> result, Func<Res<TOut>> map)
-        => result.value == null ? new(result.ErrorMessage.value, null) : map();
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.value, null) : map();
     /// <summary>
     /// Returns back <paramref name="result"/> of <typeparamref name="TOut"/> when IsErr; returns <paramref name="map"/>(result.Unwrap()) when IsOk.
     /// </summary>
     public static Res<TOut> Map<T, TOut>(this Res<T> result, Func<T, Res<TOut>> map)
-        => result.value == null ? new(result.ErrorMessage.value, null) : map(result.value);
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.value, null) : map(result.value);
 
 
     // Map: Opt<t>->Res<T>
@@ -545,8 +546,8 @@ public static partial class Extensions
     {
         try
         {
-            var result = map(value);
-            return result.value == null ? new(errNone, null) : Ok(result.value);
+            var maybe = map(value);
+            return maybe.IsNone || maybe.value == null ? new(errNone, null) : Ok(maybe.value);
         }
         catch (Exception e)
         {
@@ -618,7 +619,7 @@ public static partial class Extensions
     /// </summary>
     public static Res<TOut> TryMap<T, TOut>(this Res<T> result, Func<T, TOut> map)
     {
-        if (result.value == null) return new(result.ErrorMessage.Unwrap(), null);
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.Unwrap(), null);
         try { return Ok(map(result.value)); }
         catch (Exception e) { return new Res<TOut>(e, null); }
     }
@@ -628,7 +629,7 @@ public static partial class Extensions
     /// </summary>
     public static Res<TOut> TryMap<T, TOut>(this Res<T> result, Func<T, Res<TOut>> map)
     {
-        if (result.value == null) return new(result.ErrorMessage.Unwrap(), null);
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.Unwrap(), null);
         try { return map(result.value); }
         catch (Exception e) { return new Res<TOut>(e, null); }
     }
@@ -725,7 +726,7 @@ public static partial class Extensions
     /// </summary>
     public static async Task<Res> TryAsync<T>(this Res<T> result, Func<Task> action)
     {
-        if (result.value == null) return new(result.ErrorMessage.Unwrap());
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.Unwrap());
         try { await action(); return new(); }
         catch (Exception e) { return new(e, null); }
     }
@@ -746,7 +747,7 @@ public static partial class Extensions
     /// </summary>
     public static async Task<Res> TryAsync<T>(this Res<T> result, Func<T, Task> action)
     {
-        if (result.value == null) return new(result.ErrorMessage.Unwrap());
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.Unwrap());
         try { await action(result.value); return new(); }
         catch (Exception e) { return new(e, null); }
     }
@@ -792,7 +793,7 @@ public static partial class Extensions
     /// <inheritdoc cref="Map{T}(Res{T}, Func{T, Res})"/>
     /// </summary>
     public static Task<Res> MapAsync<T>(this Res<T> result, Func<T, Task<Res>> map)
-        => result.value == null ? Task.FromResult(new Res(result.ErrorMessage.Unwrap(), null)) : map(result.value);
+        => result.IsErr || result.value == null ? Task.FromResult(new Res(result.ErrorMessage.Unwrap(), null)) : map(result.value);
     
     
     // Map: Res<t>->Res<T>
@@ -805,17 +806,17 @@ public static partial class Extensions
     /// <inheritdoc cref="Map{T, TOut}(Res{T}, Func{T, TOut})"/>
     /// </summary>
     public static async Task<Res<TOut>> MapAsync<T, TOut>(this Res<T> result, Func<T, Task<TOut>> map)
-        => result.value == null ? new(result.ErrorMessage.Unwrap(), null) : Ok(await map(result.value));
+        => result.IsErr || result.value == null ? new(result.ErrorMessage.Unwrap(), null) : Ok(await map(result.value));
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Res{T}, Func{Res{TOut}})"/>
     /// </summary>
     public static Task<Res<TOut>> MapAsync<T, TOut>(this Res<T> result, Func<Task<Res<TOut>>> map)
-        => result.value == null ? Task.FromResult(new Res<TOut>(result.ErrorMessage.Unwrap(), null)) : map();
+        => result.IsErr || result.value == null ? Task.FromResult(new Res<TOut>(result.ErrorMessage.Unwrap(), null)) : map();
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Res{T}, Func{T, Res{TOut}})"/>
     /// </summary>
     public static Task<Res<TOut>> MapAsync<T, TOut>(this Res<T> result, Func<T, Task<Res<TOut>>> map)
-        => result.value == null ? Task.FromResult(new Res<TOut>(result.ErrorMessage.Unwrap(), null)) : map(result.value);
+        => result.IsErr || result.value == null ? Task.FromResult(new Res<TOut>(result.ErrorMessage.Unwrap(), null)) : map(result.value);
 
 
     // Map: Opt<t>->Res<T>
@@ -890,8 +891,8 @@ public static partial class Extensions
     {
         try
         {
-            var result = await map(value);
-            return result.value == null ? new(errNone, null) : Ok(result.value);
+            var maybe = await map(value);
+            return maybe.IsNone || maybe.value == null ? new(errNone, null) : Ok(maybe.value);
         }
         catch (Exception e) { return new(e, null); }
     }
@@ -953,7 +954,7 @@ public static partial class Extensions
     /// </summary>
     public static async Task<Res<TOut>> TryMapAsync<T, TOut>(this Res<T> result, Func<T, Task<TOut>> map)
     {
-        if (result.value == null) return new(result.ErrorMessage.value, null);
+        if (result.IsErr || result.value == null) return new(result.ErrorMessage.value, null);
         try { return Ok(await map(result.value)); }
         catch (Exception e) { return new(e, null); }
     }
@@ -962,7 +963,7 @@ public static partial class Extensions
     /// </summary>
     public static Task<Res<TOut>> TryMapAsync<T, TOut>(this Res<T> result, Func<T, Task<Res<TOut>>> map)
     {
-        if (result.value == null) return Task.FromResult(new Res<TOut>(result.ErrorMessage.value, null));
+        if (result.IsErr || result.value == null) return Task.FromResult(new Res<TOut>(result.ErrorMessage.value, null));
         try { return map(result.value); }
         catch (Exception e) { return Task.FromResult(new Res<TOut>(e, null)); }
     }

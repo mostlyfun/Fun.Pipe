@@ -157,12 +157,12 @@ public readonly struct Res<T> : IEquatable<Res<T>>
     /// Returns true if both values are <see cref="IsOk"/> and their unwrapped values are equal; false otherwise.
     /// </summary>
     public static bool operator ==(Res<T> first, Res<T> second)
-        => first.value != null && second.value != null && first.value.Equals(second.value);
+        => first.IsOk && second.IsOk && first.value != null && second.value != null && first.value.Equals(second.value);
     /// <summary>
     /// Returns true if either value <see cref="IsErr"/> or their unwrapped values are not equal; false otherwise.
     /// </summary>
     public static bool operator !=(Res<T> first, Res<T> second)
-        => first.value == null || second.value == null || !first.value.Equals(second.value);
+        => !(first == second);
     /// <summary>
     /// Returns whether this result is equal to the <paramref name="obj"/>.
     /// </summary>

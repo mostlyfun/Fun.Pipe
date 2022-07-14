@@ -130,17 +130,17 @@ public static partial class Extensions
     /// Returns None when <paramref name="maybe"/> IsNone; Some(<paramref name="map"/>(maybe.Unwrap())) when IsSome.
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<T, TOut> map)
-        => maybe.value == null ? None<TOut>() : Some(map(maybe.value));
+        => maybe.IsNone || maybe.value == null ? None<TOut>() : Some(map(maybe.value));
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{TOut})"/>
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<Opt<TOut>> map)
-        => maybe.value == null ? None<TOut>() : map();
+        => maybe.IsNone || maybe.value == null ? None<TOut>() : map();
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static Opt<TOut> Map<T, TOut>(this Opt<T> maybe, Func<T, Opt<TOut>> map)
-        => maybe.value == null ? None<TOut>() : map(maybe.value);
+        => maybe.IsNone || maybe.value == null ? None<TOut>() : map(maybe.value);
 
 
     #region ASYNC
@@ -168,17 +168,17 @@ public static partial class Extensions
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static async Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<T, Task<TOut>> map)
-        => maybe.value == null ? None<TOut>() : Some(await map(maybe.value));
+        => maybe.IsNone || maybe.value == null ? None<TOut>() : Some(await map(maybe.value));
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{TOut})"/>
     /// </summary>
     public static Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<Task<Opt<TOut>>> map)
-        => maybe.value == null ? Task.FromResult(None<TOut>()) : map();
+        => maybe.IsNone || maybe.value == null ? Task.FromResult(None<TOut>()) : map();
     /// <summary>
     /// <inheritdoc cref="Map{T, TOut}(Opt{T}, Func{T, TOut})"/>
     /// </summary>
     public static Task<Opt<TOut>> MapAsync<T, TOut>(this Opt<T> maybe, Func<T, Task<Opt<TOut>>> map)
-        => maybe.value == null ? Task.FromResult(None<TOut>()) : map(maybe.value);
+        => maybe.IsNone || maybe.value == null ? Task.FromResult(None<TOut>()) : map(maybe.value);
 
     #endregion
 

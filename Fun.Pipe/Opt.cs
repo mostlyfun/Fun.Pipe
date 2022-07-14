@@ -126,12 +126,12 @@ public readonly struct Opt<T> : IEquatable<Opt<T>>
     /// Returns true if both values are <see cref="IsSome"/> and their unwrapped values are equal; false otherwise.
     /// </summary>
     public static bool operator ==(Opt<T> first, Opt<T> second)
-        => first.value != null && second.value != null && first.value.Equals(second.value);
+        => first.IsSome && second.IsSome && first.value != null && second.value != null && first.value.Equals(second.value);
     /// <summary>
     /// Returns true if either value <see cref="IsNone"/> or their unwrapped values are not equal; false otherwise.
     /// </summary>
     public static bool operator !=(Opt<T> first, Opt<T> second)
-        => first.value == null || second.value == null || !first.value.Equals(second.value);
+        => !(first == second);
     /// <summary>
     /// Returns whether this option is equal to the <paramref name="obj"/>.
     /// </summary>

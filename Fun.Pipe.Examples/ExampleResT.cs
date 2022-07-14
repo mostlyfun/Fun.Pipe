@@ -76,6 +76,14 @@ public static class ExampleResT
         Assert(nonneg2 != -10);
         Assert(nonneg2.IsErr);
 
+        // Err conversions
+        static Res<double> Halve(Res<int> numToHalve)
+            => numToHalve.IsErr ? numToHalve.ToErrOf<int, double>() : Ok(numToHalve.Unwrap() * 0.5);
+        var errIntParse = TryMap(() => int.Parse("not-an-int"));
+        var errHalve = Halve(errIntParse);
+        Assert(errIntParse.IsErr && errHalve.IsErr);
+        Assert(errIntParse.ErrorMessage.Unwrap() == errHalve.ErrorMessage.Unwrap());
+
 
         // AsRes: from Opt to Res:
         // * None -> Err

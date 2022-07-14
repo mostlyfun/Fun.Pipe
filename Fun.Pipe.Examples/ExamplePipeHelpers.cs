@@ -15,11 +15,13 @@ internal static class ExamplePipeHelpers
     {
         if (expected) return;
         Err($"Assertion failed").LogIfErr();
+        throw new Exception();
     }
     internal static void Assert(bool expected, string errorMessage)
     {
         if (expected) return;
         Err($"Assertion failed: {errorMessage}").LogIfErr();
+        throw new Exception();
     }
 
 
