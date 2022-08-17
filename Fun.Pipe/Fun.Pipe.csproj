@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>Fun</RootNamespace>
     <PackageId>Fun.Pipe</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>mostlyfun</Authors>
     <Company>mostlyfun</Company>
     <Description>Functional option and result types, and pipe methods for csharp to allow for concise and expressive method chaining.</Description>
